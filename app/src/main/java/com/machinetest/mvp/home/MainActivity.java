@@ -296,6 +296,11 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
     @Override
     public void setGalleryImageList(ArrayList<GalleryImages> galleryImageList) {
+        if (galleryImageList.isEmpty()) {
+            mTextViewHint.setVisibility(View.VISIBLE);
+        } else {
+            mTextViewHint.setVisibility(View.GONE);
+        }
         bindList(galleryImageList);
     }
 
@@ -304,12 +309,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
 
         adapter.removeLoadingFooter();
         isLoading = false;
-
-        if (galleryImages.isEmpty()) {
-            mTextViewHint.setVisibility(View.VISIBLE);
-        } else {
-            mTextViewHint.setVisibility(View.GONE);
-        }
         if (currentPage <= TOTAL_PAGES) adapter.addLoadingFooter();
         else isLastPage = true;
     }
